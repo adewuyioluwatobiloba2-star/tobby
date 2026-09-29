@@ -1,0 +1,780 @@
+<!DOCTYPE html>  <html lang="en">  
+<head>  
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">    <title>T-BOS$ | Q&A QUIZ</title>    <style>  
+    * {  
+      box-sizing: border-box;  
+      font-family: Arial, sans-serif;  
+    }  
+  
+    body {  
+      margin: 0;  
+      min-height: 100vh;  
+      background: #000;  
+      color: #fff;  
+      padding: 20px;  
+    }  
+  
+    .container {  
+      max-width: 600px;  
+      margin: auto;  
+    }  
+  
+    .logo {  
+      text-align: center;  
+      margin: 20px 0 30px;  
+    }  
+  
+    .logo-circle {  
+      width: 90px;  
+      height: 90px;  
+      border: 4px solid white;  
+      border-radius: 50%;  
+      margin: auto;  
+      display: flex;  
+      align-items: center;  
+      justify-content: center;  
+      font-size: 17px;  
+      font-weight: bold;  
+    }  
+  
+    .brand {  
+      font-size: 32px;  
+      font-weight: bold;  
+      margin-top: 10px;  
+    }  
+  
+    .tagline {  
+      color: #aaa;  
+      letter-spacing: 4px;  
+      margin-top: 5px;  
+    }  
+  
+    .card {  
+      background: #111;  
+      border: 1px solid #333;  
+      border-radius: 18px;  
+      padding: 20px;  
+    }  
+  
+    h1 {  
+      text-align: center;  
+    }  
+  
+    .intro {  
+      text-align: center;  
+      color: #aaa;  
+      line-height: 1.5;  
+    }  
+  
+    label {  
+      display: block;  
+      margin-top: 18px;  
+      margin-bottom: 7px;  
+      font-weight: bold;  
+    }  
+  
+    input {  
+      width: 100%;  
+      padding: 14px;  
+      border: 1px solid #444;  
+      border-radius: 10px;  
+      background: #000;  
+      color: white;  
+      font-size: 16px;  
+    }  
+  
+    .answer {  
+      display: flex;  
+      gap: 8px;  
+      align-items: center;  
+      margin-top: 10px;  
+    }  
+  
+    .answer input {  
+      flex: 1;  
+    }  
+  
+    .answer input[type="radio"] {  
+      width: auto;  
+    }  
+  
+    button {  
+      width: 100%;  
+      padding: 15px;  
+      margin-top: 15px;  
+      border: 0;  
+      border-radius: 10px;  
+      background: white;  
+      color: black;  
+      font-weight: bold;  
+      font-size: 15px;  
+      cursor: pointer;  
+    }  
+  
+    button:active {  
+      transform: scale(.98);  
+    }  
+  
+    .dark-button {  
+      background: #222;  
+      color: white;  
+      border: 1px solid #444;  
+    }  
+  
+    .question {  
+      background: #1b1b1b;  
+      border: 1px solid #333;  
+      padding: 12px;  
+      border-radius: 10px;  
+      margin-top: 10px;  
+    }  
+  
+    .hidden {  
+      display: none;  
+    }  
+  
+    .progress {  
+      text-align: center;  
+      color: #aaa;  
+      margin-bottom: 20px;  
+    }  
+  
+    .play-question {  
+      font-size: 24px;  
+      font-weight: bold;  
+      text-align: center;  
+      line-height: 1.4;  
+      margin-bottom: 20px;  
+    }  
+  
+    .answer-btn {  
+      background: #1b1b1b;  
+      color: white;  
+      border: 1px solid #444;  
+      text-align: left;  
+    }  
+  
+    .score {  
+      text-align: center;  
+      font-size: 55px;  
+      font-weight: bold;  
+      margin: 25px 0;  
+    }  
+  
+    .result {  
+      text-align: center;  
+      color: #ccc;  
+      font-size: 18px;  
+      line-height: 1.5;  
+    }  
+  
+    .link {  
+      margin-top: 20px;  
+    }  
+  
+    .small {  
+      color: #777;  
+      text-align: center;  
+      font-size: 12px;  
+      margin-top: 20px;  
+    }  
+  </style>  </head>  <body>  <div class="container">    <!-- CREATE PAGE -->    <div id="createPage">  <div class="logo">  
+  <div class="logo-circle">T-BOS$</div>  
+  <div class="brand">T-BOS$</div>  
+  <div class="tagline">Q&A QUIZ</div>  
+</div>  
+
+<div class="card">  
+
+  <h1>How Well Do You Know Me?</h1>  
+
+  <p class="intro">  
+    Create questions about yourself and let your friends  
+    see how well they know you.  
+  </p>  
+
+  <label>Question</label>  
+
+  <input  
+    id="question"  
+    type="text"  
+    placeholder="What do I love the most?"  
+  >  
+
+  <label>Answers</label>  
+
+  <div class="answer">  
+    <input id="a0" type="text" placeholder="Answer A">  
+    <input type="radio" name="correct" value="0">  
+  </div>  
+
+  <div class="answer">  
+    <input id="a1" type="text" placeholder="Answer B">  
+    <input type="radio" name="correct" value="1">  
+  </div>  
+
+  <div class="answer">  
+    <input id="a2" type="text" placeholder="Answer C">  
+    <input type="radio" name="correct" value="2">  
+  </div>  
+
+  <div class="answer">  
+    <input id="a3" type="text" placeholder="Answer D">  
+    <input type="radio" name="correct" value="3">  
+  </div>  
+
+  <button onclick="addQuestion()">  
+    + ADD QUESTION  
+  </button>  
+
+  <div id="questions"></div>  
+
+  <button onclick="createLink()">  
+    🔗 CREATE GAME LINK  
+  </button>  
+
+  <div id="linkArea" class="link hidden">  
+
+    <input id="gameLink" readonly>  
+
+    <button onclick="copyLink()">  
+      📋 COPY LINK  
+    </button>  
+
+    <button class="dark-button" onclick="shareLink()">  
+      📤 SHARE GAME  
+    </button>  
+
+  </div>  
+
+  <button  
+    class="dark-button"  
+    onclick="clearQuestions()"  
+  >  
+    CLEAR QUESTIONS  
+  </button>  
+
+</div>
+
+  </div>    <!-- PLAY PAGE -->    <div id="playPage" class="hidden">  <div class="logo">  
+  <div class="logo-circle">T-BOS$</div>  
+  <div class="brand">T-BOS$</div>  
+  <div class="tagline">Q&A QUIZ</div>  
+</div>  
+
+<div class="card">  
+
+  <div id="progress" class="progress"></div>  
+
+  <div  
+    id="playQuestion"  
+    class="play-question"  
+  ></div>  
+
+  <div id="playAnswers"></div>  
+
+</div>
+
+  </div>    <!-- RESULT PAGE -->    <div id="resultPage" class="hidden">  <div class="logo">  
+  <div class="logo-circle">T-BOS$</div>  
+  <div class="brand">T-BOS$</div>  
+  <div class="tagline">Q&A QUIZ</div>  
+</div>  
+
+<div class="card">  
+
+  <h1>Your Result</h1>  
+
+  <div id="score" class="score"></div>  
+
+  <div id="message" class="result"></div>  
+
+  <button onclick="newQuiz()">  
+    CREATE ANOTHER QUIZ  
+  </button>  
+
+</div>
+
+  </div>  </div>  <script>  
+  
+  let questions = [];  
+  
+  let gameQuestions = [];  
+  
+  let currentQuestion = 0;  
+  
+  let score = 0;  
+  
+  
+  /* ADD QUESTION */  
+  
+  function addQuestion() {  
+  
+    const question =  
+      document.getElementById("question").value.trim();  
+  
+    const answers = [  
+      document.getElementById("a0").value.trim(),  
+      document.getElementById("a1").value.trim(),  
+      document.getElementById("a2").value.trim(),  
+      document.getElementById("a3").value.trim()  
+    ];  
+  
+    const correct =  
+      document.querySelector(  
+        'input[name="correct"]:checked'  
+      );  
+  
+  
+    if (!question) {  
+      alert("Enter a question.");  
+      return;  
+    }  
+  
+    if (answers.some(a => a === "")) {  
+      alert("Fill all four answers.");  
+      return;  
+    }  
+  
+    if (!correct) {  
+      alert("Select the correct answer.");  
+      return;  
+    }  
+  
+  
+    questions.push({  
+      question: question,  
+      answers: answers,  
+      correct: Number(correct.value)  
+    });  
+  
+  
+    document.getElementById("question").value = "";  
+  
+    for (let i = 0; i < 4; i++) {  
+      document.getElementById("a" + i).value = "";  
+    }  
+  
+    document  
+      .querySelectorAll('input[name="correct"]')  
+      .forEach(r => r.checked = false);  
+  
+  
+    showQuestions();  
+  
+    document.getElementById("question").focus();  
+  }  
+  
+  
+  /* SHOW QUESTIONS */  
+  
+  function showQuestions() {  
+  
+    const box =  
+      document.getElementById("questions");  
+  
+    box.innerHTML = "";  
+  
+  
+    questions.forEach((q, index) => {  
+  
+      const div =  
+        document.createElement("div");  
+  
+      div.className = "question";  
+  
+      div.innerHTML =  
+        "<b>Question " +  
+        (index + 1) +  
+        "</b><br>" +  
+        escapeHTML(q.question);  
+  
+      box.appendChild(div);  
+    });  
+  }  
+  
+  
+  /* CREATE LINK */  
+  
+  function createLink() {  
+  
+    if (questions.length === 0) {  
+      alert("Add at least one question.");  
+      return;  
+    }  
+  
+  
+    const data =  
+      encodeURIComponent(  
+        JSON.stringify(questions)  
+      );  
+  
+  
+    const link =  
+      window.location.origin +  
+      window.location.pathname +  
+      "#quiz=" +  
+      data;  
+  
+  
+    document.getElementById("gameLink").value =  
+      link;  
+  
+    document  
+      .getElementById("linkArea")  
+      .classList.remove("hidden");  
+  }  
+  
+  
+  /* COPY LINK */  
+  
+  async function copyLink() {  
+  
+    const input =  
+      document.getElementById("gameLink");  
+  
+    try {  
+  
+      await navigator.clipboard.writeText(  
+        input.value  
+      );  
+  
+      alert("Game link copied!");  
+  
+    } catch (error) {  
+  
+      input.select();  
+  
+      document.execCommand("copy");  
+  
+      alert("Game link copied!");  
+    }  
+  }  
+  
+  
+  /* SHARE LINK */  
+  
+  async function shareLink() {  
+  
+    const link =  
+      document.getElementById("gameLink").value;  
+  
+  
+    if (navigator.share) {  
+  
+      try {  
+  
+        await navigator.share({  
+          title: "T-BOS$ Q&A QUIZ",  
+          text: "Come and see how well you know me!",  
+          url: link  
+        });  
+  
+      } catch (error) {}  
+  
+    } else {  
+  
+      await copyLink();  
+  
+    }  
+  }  
+  
+  
+  /* CLEAR */  
+  
+  function clearQuestions() {  
+  
+    questions = [];  
+  
+    showQuestions();  
+  
+    document  
+      .getElementById("linkArea")  
+      .classList.add("hidden");  
+  }  
+  
+  
+  /* CHECK LINK */  
+  
+  function checkLink() {  
+  
+    const hash =  
+      window.location.hash;  
+  
+    const prefix = "#quiz=";  
+  
+  
+    if (!hash.startsWith(prefix)) {  
+  
+      showCreatePage();  
+  
+      return;  
+    }  
+  
+  
+    try {  
+  
+      const data =  
+        hash.substring(prefix.length);  
+  
+      gameQuestions =  
+        JSON.parse(  
+          decodeURIComponent(data)  
+        );  
+  
+  
+      if (  
+        !Array.isArray(gameQuestions) ||  
+        gameQuestions.length === 0  
+      ) {  
+        throw new Error();  
+      }  
+  
+  
+      currentQuestion = 0;  
+  
+      score = 0;  
+  
+      showPlayPage();  
+  
+      showQuestion();  
+  
+  
+    } catch (error) {  
+  
+      alert("This game link is not valid.");  
+  
+      showCreatePage();  
+    }  
+  }  
+  
+  
+  /* SHOW QUESTION */  
+  
+  function showQuestion() {  
+  
+    const q =  
+      gameQuestions[currentQuestion];  
+  
+  
+    if (!q) {  
+  
+      showResult();  
+  
+      return;  
+    }  
+  
+  
+    document.getElementById("progress")  
+      .textContent =  
+      "Question " +  
+      (currentQuestion + 1) +  
+      " of " +  
+      gameQuestions.length;  
+  
+  
+    document.getElementById("playQuestion")  
+      .textContent =  
+      q.question;  
+  
+  
+    const box =  
+      document.getElementById("playAnswers");  
+  
+    box.innerHTML = "";  
+  
+  
+    q.answers.forEach((answer, index) => {  
+  
+      const button =  
+        document.createElement("button");  
+  
+      button.className =  
+        "answer-btn";  
+  
+      button.textContent =  
+        answer;  
+  
+      button.onclick =  
+        function() {  
+          answerQuestion(index);  
+        };  
+  
+  
+      box.appendChild(button);  
+  
+    });  
+  
+  }  
+  
+  
+  /* ANSWER QUESTION */  
+  
+  function answerQuestion(index) {  
+  
+    const q =  
+      gameQuestions[currentQuestion];  
+  
+  
+    if (index === q.correct) {  
+      score++;  
+    }  
+  
+  
+    currentQuestion++;  
+  
+  
+    if (  
+      currentQuestion >=  
+      gameQuestions.length  
+    ) {  
+  
+      showResult();  
+  
+    } else {  
+  
+      showQuestion();  
+  
+    }  
+  
+  }  
+  
+  
+  /* RESULT */  
+  
+  function showResult() {  
+  
+    showPage("resultPage");  
+  
+  
+    document.getElementById("score")  
+      .textContent =  
+      score +  
+      " / " +  
+      gameQuestions.length;  
+  
+  
+    const percentage =  
+      (score / gameQuestions.length) * 100;  
+  
+  
+    let message;  
+  
+  
+    if (percentage === 100) {  
+  
+      message =  
+        "🔥 Perfect score! You really know this person!";  
+  
+    } else if (percentage >= 75) {  
+  
+      message =  
+        "👏 Amazing! You know this person very well.";  
+  
+    } else if (percentage >= 50) {  
+  
+      message =  
+        "😎 Not bad! You know this person quite well.";  
+  
+    } else if (percentage >= 25) {  
+  
+      message =  
+        "😂 You need to know this person better!";  
+  
+    } else {  
+  
+      message =  
+        "🤣 Omo! You don't know this person at all!";  
+  
+    }  
+  
+  
+    document.getElementById("message")  
+      .textContent =  
+      message;  
+  }  
+  
+  
+  /* NEW QUIZ */  
+  
+  function newQuiz() {  
+  
+    questions = [];  
+  
+    gameQuestions = [];  
+  
+    currentQuestion = 0;  
+  
+    score = 0;  
+  
+  
+    window.location.hash = "";  
+  
+    showCreatePage();  
+  
+    showQuestions();  
+  }  
+  
+  
+  /* PAGE FUNCTIONS */  
+  
+  function showPage(id) {  
+  
+    document  
+      .getElementById("createPage")  
+      .classList.add("hidden");  
+  
+    document  
+      .getElementById("playPage")  
+      .classList.add("hidden");  
+  
+    document  
+      .getElementById("resultPage")  
+      .classList.add("hidden");  
+  
+  
+    document  
+      .getElementById(id)  
+      .classList.remove("hidden");  
+  }  
+  
+  
+  function showCreatePage() {  
+  
+    showPage("createPage");  
+  
+  }  
+  
+  
+  function showPlayPage() {  
+  
+    showPage("playPage");  
+  
+  }  
+  
+  
+  /* SECURITY */  
+  
+  function escapeHTML(text) {  
+  
+    const div =  
+      document.createElement("div");  
+  
+    div.textContent = text;  
+  
+    return div.innerHTML;  
+  }  
+  
+  
+  /* START */  
+  
+  window.onload =  
+    function() {  
+  
+      checkLink();  
+  
+    };  
+  
+</script>  </body>  
+</html>
